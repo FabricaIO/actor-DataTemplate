@@ -29,34 +29,37 @@ bool DataTemplate::begin() {
 }
 
 /// @brief Receives an action
-/// @param signal The action to process (only option is 0 for get data)
+/// @param action The action to process (only option is 0 for get data)
 /// @param payload Not used
 /// @return A plaintext response with the data
-std::tuple<bool, String> DataTemplate::receiveAction(int signal, String payload) {
-	// Take measurement
-	SensorManager::takeMeasurement();
-	// Allocate the JSON document
-  	JsonDocument doc;
-	// Deserialize file contents
-	DeserializationError error = deserializeJson(doc, SensorManager::getLastMeasurement());
-	// Test if parsing succeeds.
-	if (error) {
-		Serial.print(F("Deserialization failed: "));
-		Serial.println(error.f_str());
-		return { false, "ERROR" };
+std::tuple<bool, String> DataTemplate::receiveAction(int action, String payload) {
+	if (action == 0) {
+		// Take measurement
+		SensorManager::takeMeasurement();
+		// Allocate the JSON document
+		JsonDocument doc;
+		// Deserialize file contents
+		DeserializationError error = deserializeJson(doc, SensorManager::getLastMeasurement());
+		// Test if parsing succeeds.
+		if (error) {
+			Serial.print(F("Deserialization failed: "));
+			Serial.println(error.f_str());
+			return { false, "ERROR" };
+		}
+		// Build response
+		String data = current_config.template_start;
+		for (const auto& m : doc["measurements"].as<JsonArray>()) {
+			String new_line = current_config.template_data;
+			new_line.replace("%PARAMETER%", m["parameter"].as<String>());
+			new_line.replace("%UNIT%", m["unit"].as<String>());
+			new_line.replace("%VALUE%", m["value"].as<String>());
+			data += new_line;
+		}
+		data += current_config.template_end;
+		data.replace("%N%",String('\n'));
+		return { false, data };
 	}
-	// Build response
-	String data = current_config.template_start;
-	for (const auto& m : doc["measurements"].as<JsonArray>()) {
-		String new_line = current_config.template_data;
-		new_line.replace("%PARAMETER%", m["parameter"].as<String>());
-		new_line.replace("%UNIT%", m["unit"].as<String>());
-		new_line.replace("%VALUE%", m["value"].as<String>());
-		data += new_line;
-	}
-	data += current_config.template_end;
-	data.replace("%N%",String('\n'));
-	return { false, data };
+	return { true, R"({"Response": "FAIL"})" };
 }
 
 /// @brief Gets the current config
