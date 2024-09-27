@@ -7,12 +7,12 @@
 */
 #pragma once
 #include <Arduino.h>
-#include <SignalReceiver.h>
+#include <Actor.h>
 #include <SensorManager.h>
 #include <ArduinoJson.h>
 
 /// @brief Allows retrieval of sensor data formatted for Prometheus ingest
-class DataTemplate : public SignalReceiver {
+class DataTemplate : public Actor {
 	private:
 		/// @brief Holds data logger configuration
 		struct {
@@ -32,7 +32,7 @@ class DataTemplate : public SignalReceiver {
 	public:
 		DataTemplate(String ConfigFile = "DataTemplate.json");
 		bool begin();
-		std::tuple<bool, String> receiveSignal(int signal, String payload = "");
+		std::tuple<bool, String> receiveAction(int action, String payload = "");
 		String getConfig();
 		bool setConfig(String config);;
 };

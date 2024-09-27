@@ -10,10 +10,10 @@ DataTemplate::DataTemplate(String ConfigFile) {
 /// @return True on success
 bool DataTemplate::begin() {
 	// Set description
-	Description.signalQuantity = 1;
+	Description.actionQuantity = 1;
 	Description.type = "dataformat";
 	Description.name = "Data Template";
-	Description.signals = {{"Get Data", 0}};
+	Description.actions = {{"Get Data", 0}};
 	Description.id = 3;
 	bool result = false;
 	// Create settings directory if necessary
@@ -28,11 +28,11 @@ bool DataTemplate::begin() {
 	return result;
 }
 
-/// @brief Receives a signal
-/// @param signal The signal to process (only option is 0 for get data)
+/// @brief Receives an action
+/// @param signal The action to process (only option is 0 for get data)
 /// @param payload Not used
 /// @return A plaintext response with the data
-std::tuple<bool, String> DataTemplate::receiveSignal(int signal, String payload) {
+std::tuple<bool, String> DataTemplate::receiveAction(int signal, String payload) {
 	// Take measurement
 	SensorManager::takeMeasurement();
 	// Allocate the JSON document
