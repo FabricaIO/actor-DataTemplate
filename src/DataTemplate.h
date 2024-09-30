@@ -26,7 +26,7 @@ class DataTemplate : public Actor {
 			String template_data;
 		} current_config;
 
-		/// @brief Full path to config file
+		/// @brief Full config_path to config file
 		String config_path;
 
 	public:
