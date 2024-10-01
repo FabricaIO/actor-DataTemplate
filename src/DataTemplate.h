@@ -13,7 +13,7 @@
 
 /// @brief Allows retrieval of sensor data formatted for Prometheus ingest
 class DataTemplate : public Actor {
-	private:
+	protected:
 		/// @brief Holds data logger configuration
 		struct {
 			/// @brief String to use for the start of the template
@@ -34,5 +34,5 @@ class DataTemplate : public Actor {
 		bool begin();
 		std::tuple<bool, String> receiveAction(int action, String payload = "");
 		String getConfig();
-		bool setConfig(String config);;
+		bool setConfig(String config, bool save);
 };

@@ -23,7 +23,7 @@ bool DataTemplate::begin() {
 		result = saveConfig(config_path, getConfig());
 	} else {
 		// Load settings
-		result = setConfig(Storage::readFile(config_path));
+		result = setConfig(Storage::readFile(config_path), false);
 	}
 	return result;
 }
@@ -80,9 +80,10 @@ String DataTemplate::getConfig() {
 }
 
 /// @brief Sets the configuration for this device
-/// @param config The JSON config to use
+/// @param config A JSON string of the configuration settings
+/// @param save If the configuration should be saved to a file
 /// @return True on success
-bool DataTemplate::setConfig(String config) {
+bool DataTemplate::setConfig(String config, bool save) {
 	// Allocate the JSON document
   	JsonDocument doc;
 	// Deserialize file contents
@@ -97,5 +98,8 @@ bool DataTemplate::setConfig(String config) {
 	current_config.template_start = doc["template_start"].as<String>();
 	current_config.template_end = doc["template_end"].as<String>();
 	current_config.template_data = doc["template_data"].as<String>();
-	return saveConfig(config_path, getConfig());
+	if (save) {
+		return saveConfig(config_path, getConfig());
+	}
+	return true;
 }
