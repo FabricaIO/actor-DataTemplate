@@ -11,7 +11,7 @@
 #include <SensorManager.h>
 #include <ArduinoJson.h>
 
-/// @brief Allows retrieval of sensor data formatted for Prometheus ingest
+/// @brief Allows retrieval of sensor data formatted in a custom manner
 class DataTemplate : public Actor {
 	protected:
 		/// @brief Holds data logger configuration
