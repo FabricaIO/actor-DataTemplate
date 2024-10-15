@@ -3,7 +3,7 @@
 /// @brief Creates a Data Template object
 /// @param ConfigFile The file name to store settings in
 DataTemplate::DataTemplate(String ConfigFile) {
-	config_path = "/settings/sig/" + ConfigFile;
+	config_path = "/settings/act/" + ConfigFile;
 }
 
 /// @brief Starts a Data Template object
