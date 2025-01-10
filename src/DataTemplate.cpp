@@ -14,7 +14,6 @@ bool DataTemplate::begin() {
 	Description.type = "dataformat";
 	Description.name = "Data Template";
 	Description.actions = {{"Get Data", 0}};
-	Description.id = 3;
 	bool result = false;
 	// Create settings directory if necessary
 	if (!checkConfig(config_path)) {
