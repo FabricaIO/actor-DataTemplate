@@ -1,0 +1,44 @@
+{
+	"name": "Fabrica-IO Actor Data Template",
+	"version": "0.5.0",
+	"description": "Allows retrieving all sensor data in a custom template",
+	"keywords": "Fabrica-IO, actor, template, data",
+	"repository":
+	{
+	  "type": "git",
+	  "url": "https://github.com/FabricaIO/actor-DataTemplate.git"
+	},
+	"authors":
+	[
+	  {
+		"name": "Sam Groveman",
+		"email": "SamGroveman@outlook.com",
+		"url": "https://github.com/FabricaIO"
+	  }
+	],
+	"dependencies": {
+	  },
+	"license": "GPLv3",
+	"homepage": "https://github.com/FabricaIO",
+	"frameworks": "arduino",
+	"platforms": "*",
+	"fabrica-io" : {
+		"name": "Template",
+		"type": 1,
+		"category": "Data",
+		"libname": "DataTemplate",
+		"includes": ["DataTemplate"],
+		"description": "Allows retrieving all sensor data in a custom template",
+		"constructor": 
+		[
+			[
+				{
+					"name": "Configfile",
+					"type": "String",
+					"description": "The file name to store settings in",
+					"default": "DataTemplate.json"
+				}
+			]
+		]
+	}
+  }
