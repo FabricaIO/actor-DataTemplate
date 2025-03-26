@@ -67,6 +67,7 @@ String DataTemplate::getConfig() {
 	// Allocate the JSON document
 	JsonDocument doc;
 	// Assign current values
+	doc["Name"] = Description.name;
 	doc["template_start"] = current_config.template_start;
 	doc["template_end"] = current_config.template_end;
 	doc["template_data"] = current_config.template_data;
@@ -94,6 +95,7 @@ bool DataTemplate::setConfig(String config, bool save) {
 		return false;
 	}
 	// Assign loaded values
+	Description.name = doc["Name"].as<String>();
 	current_config.template_start = doc["template_start"].as<String>();
 	current_config.template_end = doc["template_end"].as<String>();
 	current_config.template_data = doc["template_data"].as<String>();
