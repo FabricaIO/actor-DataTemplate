@@ -33,6 +33,6 @@ class DataTemplate : public Actor {
 		DataTemplate(String ConfigFile = "DataTemplate.json");
 		bool begin();
 		std::tuple<bool, String> receiveAction(int action, String payload = "");
-		JsonDocument getConfig();
-		bool setConfig(JsonDocument config, bool save);
+		String getConfig();
+		bool setConfig(String config, bool save);
 };
