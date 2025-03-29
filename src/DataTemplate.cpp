@@ -1,8 +1,9 @@
 #include "DataTemplate.h"
 
 /// @brief Creates a Data Template object
+/// @param Name The device name
 /// @param ConfigFile The file name to store settings in
-DataTemplate::DataTemplate(String ConfigFile) {
+DataTemplate::DataTemplate(String Name, String ConfigFile) : Actor(Name) {
 	config_path = "/settings/act/" + ConfigFile;
 }
 
@@ -12,7 +13,6 @@ bool DataTemplate::begin() {
 	// Set description
 	Description.actionQuantity = 1;
 	Description.type = "dataformat";
-	Description.name = "Data Template";
 	Description.actions = {{"Get Data", 0}};
 	bool result = false;
 	// Create settings directory if necessary

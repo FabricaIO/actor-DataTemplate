@@ -30,7 +30,7 @@ class DataTemplate : public Actor {
 		String config_path;
 
 	public:
-		DataTemplate(String ConfigFile = "DataTemplate.json");
+		DataTemplate(String Name, String ConfigFile = "DataTemplate.json");
 		bool begin();
 		std::tuple<bool, String> receiveAction(int action, String payload = "");
 		String getConfig();
