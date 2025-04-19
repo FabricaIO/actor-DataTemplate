@@ -43,7 +43,7 @@ std::tuple<bool, String> DataTemplate::receiveAction(int action, String payload)
 		if (error) {
 			Logger.print(F("Deserialization failed: "));
 			Logger.println(error.f_str());
-			return { false, "ERROR" };
+			return  { true, R"({"success": false, "Response": "Could not parse measurements"})" };
 		}
 		// Build response
 		String data = current_config.template_start;
@@ -58,7 +58,7 @@ std::tuple<bool, String> DataTemplate::receiveAction(int action, String payload)
 		data.replace("%N%",String('\n'));
 		return { false, data };
 	}
-	return { true, R"({"Response": "FAIL"})" };
+	return { true, R"({"success": false, "Response": "Unkown action"})" };
 }
 
 /// @brief Gets the current config
