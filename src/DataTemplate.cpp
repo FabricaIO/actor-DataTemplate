@@ -11,7 +11,6 @@ DataTemplate::DataTemplate(String Name, String ConfigFile) : Actor(Name) {
 /// @return True on success
 bool DataTemplate::begin() {
 	// Set description
-	Description.actionQuantity = 1;
 	Description.type = "dataformat";
 	Description.actions = {{"Get Data", 0}};
 	bool result = false;
