@@ -30,7 +30,7 @@ bool DataTemplate::begin() {
 /// @param action The action to process (only option is 0 for get data)
 /// @param payload Not used
 /// @return A plaintext response with the data
-std::tuple<bool, String> DataTemplate::receiveAction(int action, String payload) {
+std::pair<bool, String> DataTemplate::receiveAction(const int action, const String& payload) {
 	if (action == 0) {
 		// Take measurement
 		SensorManager::takeMeasurement();
